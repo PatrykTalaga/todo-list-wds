@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import InputTask from './InputTask'
 import ToDoList from './ToDoList'
 
 function App() {
 
-  const [toDoList, setToDoList] = useState([])
+  const [toDoList, setToDoList] = useState(()=>{
+    const localValue = localStorage.getItem("ITEMS")
+    if (localValue == null) return []
+    return JSON.parse(localValue)
+  })
+
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(toDoList))
+  }, [toDoList])
 
   function addTask(input){
     setToDoList([...toDoList, input])
