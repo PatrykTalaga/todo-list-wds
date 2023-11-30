@@ -1,16 +1,13 @@
 import { useState } from 'react'
 import './App.css'
+import InputTask from './InputTask'
 
 function App() {
 
-  const [input, setInput] = useState({ task:"", id: crypto.randomUUID(), status: false })
   const [toDoList, setToDoList] = useState([])
 
-  function submitToDo(e){
-    e.preventDefault()
-    if(input.task === "") return
+  function addTask(input){
     setToDoList([...toDoList, input])
-    setInput({ task:"", id: crypto.randomUUID(), status: false })
   }
 
   function deleteTask(id){
@@ -32,17 +29,15 @@ function App() {
 
   return (
     <>
-      <form onSubmit={submitToDo}>
-        <label>ToDo List</label><br></br>
-        <input type='text' value={input.task} onChange={e => setInput({...input, task: e.target.value})}></input>
-        <button type='submit'>+</button>
-      </form>
+      <InputTask submit={addTask} />
       <div>
         <ul>
           {toDoList.map((toDo) => (
             
             <li key={toDo.id}>
-                  <input type='checkbox' checked={toDo.status} onChange={()=>handleCheckbox(toDo.id)}></input>
+                  <input type='checkbox' checked={toDo.status}
+                   onChange={()=>handleCheckbox(toDo.id)}>
+                  </input>
                   <label>{toDo.task}</label>
                   <button onClick={()=>deleteTask(toDo.id)}>-</button>
             </li>
