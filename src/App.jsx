@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import InputTask from './InputTask'
+import ToDoList from './ToDoList'
 
 function App() {
 
@@ -31,18 +32,7 @@ function App() {
     <>
       <InputTask submit={addTask} />
       <div>
-        <ul>
-          {toDoList.map((toDo) => (
-            
-            <li key={toDo.id}>
-                  <input type='checkbox' checked={toDo.status}
-                   onChange={()=>handleCheckbox(toDo.id)}>
-                  </input>
-                  <label>{toDo.task}</label>
-                  <button onClick={()=>deleteTask(toDo.id)}>-</button>
-            </li>
-          ))}
-        </ul>
+        <ToDoList toDoList={toDoList} deleteTask={deleteTask} handleCheckbox={handleCheckbox} />
       </div>
     </>
   )
