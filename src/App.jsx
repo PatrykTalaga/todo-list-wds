@@ -36,11 +36,29 @@ function App() {
     setToDoList(newToDOList)
   }
 
+  function saveCounter(id, newCounter){
+    const newToDOList = toDoList.filter((toDo) => {
+      if (toDo.id == id) {
+        console.log(newCounter)
+        toDo.counter = newCounter
+        console.log(toDo)
+        return toDo
+      } else {
+        return toDo
+      }
+    })
+    setToDoList(newToDOList)
+  }
+
   return (
     <>
       <InputTask submit={addTask} />
       <div>
-        <ToDoList toDoList={toDoList} deleteTask={deleteTask} handleCheckbox={handleCheckbox} />
+        <ToDoList toDoList={toDoList}
+          deleteTask={deleteTask}
+          handleCheckbox={handleCheckbox}
+          saveCounter={saveCounter}
+        />
       </div>
     </>
   )

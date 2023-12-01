@@ -6,7 +6,8 @@ function InputTask({ submit }){
       {
        task:"",
        id: crypto.randomUUID(),
-       status: false
+       status: false,
+       counter: 0
       })
   
   function submitToDo(e){
@@ -16,7 +17,8 @@ function InputTask({ submit }){
       setInput(
         { task:"",
           id: crypto.randomUUID(),
-          status: false
+          status: false,
+          counter: 0
         })
     }
   return (
